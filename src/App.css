@@ -1,0 +1,413 @@
+:root {
+  --brown-primary: #5C3D2E;
+  --brown-hover: #4A3023;
+  --brown-soft: #DDB8A2;
+  --brown-light: #EDE0D4;
+  --text-dark: #2B1B17;
+  --text-muted: #7A665A;
+  --card-bg: rgba(255, 255, 255, 0.94); /* Semi-transparan agar blending halus */
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  color: var(--text-dark);
+  user-select: none;
+}
+
+/* Background Menggunakan Gambar Bintang Estetis */
+.main-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-image: url('./download (2).jpg'); /* Sesuaikan nama/path file gambar kamu */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* 1. LAYAR AWAL: IKON KELINCI */
+.bunny-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bunny-icon-only {
+  background-color: var(--card-bg);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 165px;
+  height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.bunny-icon-only:hover {
+  transform: scale(1.06);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.35);
+  border-color: #FFFFFF;
+}
+
+.bunny-svg-container {
+  position: relative;
+  width: 105px;
+  height: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Sparkles Particle */
+.sparkle {
+  position: absolute;
+  font-size: 16px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sparkle.active-1 {
+  animation: sparkleFly1 0.7s ease-out forwards;
+}
+
+.sparkle.active-2 {
+  animation: sparkleFly2 0.7s ease-out forwards;
+}
+
+.sparkle.active-3 {
+  animation: sparkleFly3 0.7s ease-out forwards;
+}
+
+@keyframes sparkleFly1 {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+  100% { transform: translate(-45px, -45px) scale(1.2); opacity: 0; }
+}
+
+@keyframes sparkleFly2 {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+  100% { transform: translate(45px, -40px) scale(1.2); opacity: 0; }
+}
+
+@keyframes sparkleFly3 {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+  100% { transform: translate(0px, -60px) scale(1.3); opacity: 0; }
+}
+
+/* Animasi Koin Jatuh */
+.coin-drop {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.coin-drop.animating {
+  animation: dropCoinRich 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes dropCoinRich {
+  0% { top: -35px; opacity: 0; transform: translateX(-50%) rotate(-180deg) scale(1.4); }
+  40% { opacity: 1; }
+  80% { top: 16px; opacity: 1; transform: translateX(-50%) rotate(0deg) scale(0.9); }
+  100% { top: 26px; opacity: 0; transform: translateX(-50%) scale(0.3); }
+}
+
+/* Squash & Bounce Kelinci */
+.bunny-svg {
+  transition: transform 0.2s ease;
+}
+
+.bunny-svg.bounce-rich {
+  animation: squashBounce 0.75s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+@keyframes squashBounce {
+  0% { transform: scale(1, 1) translateY(0); }
+  25% { transform: scale(1.18, 0.82) translateY(6px); }
+  45% { transform: scale(0.88, 1.15) translateY(-12px) rotate(-5deg); }
+  65% { transform: scale(1.08, 0.92) translateY(3px) rotate(4deg); }
+  85% { transform: scale(0.98, 1.02) translateY(-1px); }
+  100% { transform: scale(1, 1) translateY(0); }
+}
+
+/* 2. FORMULIR PENGELUARAN */
+.form-card {
+  width: 100%;
+  max-width: 410px;
+  background-color: var(--card-bg);
+  border-radius: 26px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  box-sizing: border-box;
+  animation: cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardEnter {
+  0% { opacity: 0; transform: scale(0.9) translateY(24px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Tombol Kembali Ikon Saja */
+.back-btn-icon {
+  background: #FAF6F0;
+  border: 1px solid var(--brown-light);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  color: var(--brown-primary);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.back-btn-icon:hover {
+  background: var(--brown-light);
+  transform: translateX(-2px);
+}
+
+/* Judul Utama Besar */
+.form-main-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--brown-primary);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+/* Form Inputs */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.amount-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 14px;
+  font-weight: 700;
+  color: var(--brown-primary);
+  font-size: 15px;
+}
+
+.input-amount {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  border-radius: 14px;
+  border: 1.5px solid var(--brown-light);
+  background-color: #FAF8F5;
+  font-size: 15px;
+  font-weight: 700;
+  outline: none;
+  color: var(--text-dark);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.input-amount:focus {
+  border-color: var(--brown-primary);
+}
+
+.input-text {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--brown-light);
+  background-color: #FAF8F5;
+  font-size: 13px;
+  outline: none;
+  color: var(--text-dark);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.input-text:focus {
+  border-color: var(--brown-primary);
+}
+
+/* Kategori Grid */
+.category-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.cat-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 9px 4px;
+  border-radius: 12px;
+  border: 1.5px solid var(--brown-light);
+  background-color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cat-btn.selected {
+  border-color: var(--brown-primary);
+  background-color: var(--brown-light);
+}
+
+.cat-btn .emoji {
+  font-size: 18px;
+}
+
+.cat-btn .label {
+  font-size: 10px;
+  font-weight: 700;
+  margin-top: 4px;
+  color: var(--text-dark);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background-color: var(--brown-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(92, 61, 46, 0.25);
+  margin-top: 6px;
+  transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--brown-hover);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Riwayat Catatan */
+.history-box {
+  margin-top: 20px;
+  border-top: 1px dashed var(--brown-light);
+  padding-top: 14px;
+}
+
+.history-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.history-empty {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 12px 0;
+  font-style: italic;
+}
+
+.history-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FAF8F5;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  border: 1px solid rgba(237, 224, 212, 0.6);
+}
+
+.row-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-note {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.row-val {
+  font-weight: 700;
+  color: var(--brown-primary);
+}
+
+/* Banner Total Pengeluaran (Di Paling Bawah) */
+.summary-banner {
+  background: linear-gradient(135deg, #5C3D2E 0%, #7A523E 100%);
+  border-radius: 18px;
+  padding: 16px 20px;
+  color: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(92, 61, 46, 0.25);
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-label {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.85;
+  letter-spacing: 0.5px;
+}
+
+.summary-amount {
+  font-size: 22px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.summary-icon {
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.18);
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
